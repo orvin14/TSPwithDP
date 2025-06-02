@@ -10,19 +10,19 @@ Output
 Total jarak (cost) minimum yang harus ditempuh untuk mengunjungi semua kota tepat satu kali dan kembali ke kota asal.
 Jalur (path) terpendek yang dilalui (urutan kota).
 Algoritma
-1. Representasi status dengan bitmask
+1. Representasi status dengan bitmask  
 Setiap subset kota yang sudah dikunjungi direpresentasikan sebagai sebuah integer (bitmask) dengan bit ke-i menyatakan apakah kota i sudah dikunjungi (1) atau belum (0).
 Contoh: mask = 01101 (biner) berarti kota ke-0, 2, dan 3 sudah dikunjungi.
-2. Memoisasi (DP Table)
+2. Memoisasi (DP Table)  
 Gunakan tabel memo berukuran [2^N][N] untuk menyimpan hasil minimum cost.
 memo(mask)(u) menyimpan biaya minimum untuk rute yang sudah mengunjungi kota sesuai mask dan berada di kota u terakhir.
-3. Transisi state
+3. Transisi state  
 Dari status memo(mask)(u), coba pindah ke kota v yang belum dikunjungi (v dimana bit ke-v di mask = 0).
 Update memo(nextMask)(v) dengan biaya yang lebih kecil jika ditemukan.
 nextMask = mask | (1 << v) berarti tambahkan kota v ke dalam subset yang dikunjungi.
-4. Inisialisasi
+4. Inisialisasi  
 Mulai dari hanya kota 0 yang sudah dikunjungi: memo(1)(0) = 0
-5. Rekonstruksi jalur
+5. Rekonstruksi jalur  
 Setelah semua kota dikunjungi (mask = (1 << N) - 1), cari kota terakhir i yang menghasilkan biaya minimum untuk kembali ke kota asal.
 Gunakan array parent untuk melacak jalur yang diambil dan membangun path akhir.
 ## Cara Compile dan Run Menggunakan VSCode
